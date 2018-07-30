@@ -53,7 +53,7 @@ import { CoreModule } from './core/core.module';
   providers: [
   ],
   bootstrap: [AppComponent],
-  entryComponents:[
+  entryComponents: [
     AddEditMilestoneDialogComponent
   ]
 })
