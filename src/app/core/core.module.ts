@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
     imports: [],
     exports: [],
     declarations: [],
-    providers: [ 
+    providers: [
         ProjectService,
         AccountService,
         AuthService
