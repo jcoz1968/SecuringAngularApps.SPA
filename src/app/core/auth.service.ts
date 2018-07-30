@@ -18,6 +18,12 @@ export class AuthService {
       response_type: 'id_token token',
       post_logout_redirect_uri: `${Constants.clientRoot}?postLogout=true`,
       userStore: new WebStorageStateStore({ store: window.localStorage })
+      // metadata: {
+      //   authorization_endpoint: '',
+      //   issuer: '',
+      //   jwks_uri: '',
+      //   end_session_endpoint: '',
+      // }
     };
     this._userManager = new UserManager(config);
     this._userManager.getUser().then(user => {
