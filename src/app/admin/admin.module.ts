@@ -18,7 +18,6 @@ import { DeleteDialogComponent } from './delete-dialog.component';
 import { ManagePermissionsComponent } from './manage-permissions.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AddProjectUserDialogComponent } from './add-project-user-dialog.component';
-import { CoreModule } from '../core/core.module';
 
 @NgModule({
   imports: [
@@ -31,8 +30,7 @@ import { CoreModule } from '../core/core.module';
     MatTableModule,
     MatInputModule,
     MatSelectModule,
-    AdminRoutingModule,
-    CoreModule
+    AdminRoutingModule
   ],
   exports: [],
   declarations: [

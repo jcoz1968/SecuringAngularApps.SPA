@@ -24,7 +24,6 @@ import { ProjectComponent } from './projects/project.component';
 import { AddEditMilestoneDialogComponent } from './projects/add-edit-milestone-dialog.component';
 import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
-import { UnauthorizedComponent } from './home/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +32,7 @@ import { UnauthorizedComponent } from './home/unauthorized.component';
     ContactUsComponent,
     ProjectListComponent,
     ProjectComponent,
-    AddEditMilestoneDialogComponent,
-    UnauthorizedComponent
+    AddEditMilestoneDialogComponent
   ],
   imports: [
     BrowserModule,
