@@ -10,7 +10,7 @@ export class AuthService {
   private _user: User;
 
   constructor(private httpClient: HttpClient) {
-    var config = {
+    const config = {
       authority: Constants.stsAuthority,
       client_id: Constants.clientId,
       redirect_uri: `${Constants.clientRoot}assets/oidc-login-redirect.html`,
