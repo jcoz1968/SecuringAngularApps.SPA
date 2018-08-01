@@ -1,3 +1,4 @@
+import { UnauthorizedComponent } from './home/unauthorized.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -32,7 +33,8 @@ import { CoreModule } from './core/core.module';
     ContactUsComponent,
     ProjectListComponent,
     ProjectComponent,
-    AddEditMilestoneDialogComponent
+    AddEditMilestoneDialogComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
