@@ -71,7 +71,7 @@ export class ProjectComponent implements OnInit {
         data: {
           milestone: clonedMilestone,
           milestoneStatuses: this.milestoneStatuses,
-          defaultStatus: this.milestoneStatuses.find(ms => ms.id == milestone.milestoneStatusId)
+          defaultStatus: this.milestoneStatuses.find(ms => ms.id === milestone.milestoneStatusId)
         }
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -95,12 +95,14 @@ export class ProjectComponent implements OnInit {
             }, error => this.error = Utils.formatError(error));
               }
       });
-  
+
     }
 
   getStatusName(id: number) {
-      if (!this.milestoneStatuses) return '';
-      var status = this.milestoneStatuses.find(ms => ms.id == id);
+      if (!this.milestoneStatuses) {
+        return '';
+      }
+      var status = this.milestoneStatuses.find(ms => ms.id === id);
       return status ? status.name : 'unknown';
   }
 }
