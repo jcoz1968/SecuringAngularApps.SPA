@@ -1,3 +1,4 @@
+import { AdminRouteGuard } from './admin-route.guard';
 import { NgModule } from '@angular/core';
 import { ProjectService } from './project.service';
 import { AccountService } from './account.service';
@@ -13,11 +14,12 @@ import { AuthInterceptor } from './auth.interceptor';
         {
           provide: HTTP_INTERCEPTORS,
           useClass: AuthInterceptor,
-          multi: true
+          multi: true,
         },
         ProjectService,
         AccountService,
-        AuthService
+        AuthService,
+        AdminRouteGuard
     ],
 })
 export class CoreModule { }
