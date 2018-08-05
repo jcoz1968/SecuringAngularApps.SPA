@@ -44,4 +44,11 @@ export class AppComponent implements OnInit {
   isLoggedIn() {
     return this._authService.isLoggedIn();
   }
+
+  isAdmin() {
+    return this._authService.authContext &&
+      this._authService.authContext.claims &&
+      (this._authService.authContext.claims.find(c => c.type === 'http://schemas.microsoft.com/ws/2000/06/identity/claims/role' &&
+        c.value === 'Admin'));
+  }
 }

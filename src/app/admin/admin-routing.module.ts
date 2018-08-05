@@ -1,3 +1,4 @@
+import { AdminRouteGuard } from './../core/admin-route.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -5,7 +6,7 @@ import { ManageProjectsComponent } from './manage-projects.component';
 import { ManagePermissionsComponent } from './manage-permissions.component';
 
 const routes: Routes = [
-  { path: 'admin', component: ManageProjectsComponent },
+  { path: 'admin', component: ManageProjectsComponent, canActivate: [ AdminRouteGuard ] },
   { path: 'admin/manage-permissions/:projectId', component: ManagePermissionsComponent }
 ];
 

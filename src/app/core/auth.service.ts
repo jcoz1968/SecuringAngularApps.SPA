@@ -1,15 +1,19 @@
+import { AuthContext } from './../model/auth-context';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { UserManager, User, WebStorageStateStore } from 'oidc-client';
+import { UserManager, User, WebStorageStateStore, Log } from 'oidc-client';
 import { Constants } from '../constants';
+import { Utils } from './utils';
 
 @Injectable()
 export class AuthService {
   private _userManager: UserManager;
   private _user: User;
+  public authContext: AuthContext;
 
   constructor(private httpClient: HttpClient) {
+    Log.logger = console;
     const config = {
       authority: Constants.stsAuthority,
       client_id: Constants.clientId,
@@ -17,7 +21,9 @@ export class AuthService {
       scope: 'openid projects-api profile',
       response_type: 'id_token token',
       post_logout_redirect_uri: `${Constants.clientRoot}?postLogout=true`,
-      userStore: new WebStorageStateStore({ store: window.localStorage })
+      userStore: new WebStorageStateStore({ store: window.localStorage }),
+      automaticSilentRenew: true,
+      silent_redirect_uri: `${Constants.clientRoot}assets/silent-redirect.html`
       // metadata: {
       //   authorization_endpoint: '',
       //   issuer: '',
@@ -29,7 +35,14 @@ export class AuthService {
     this._userManager.getUser().then(user => {
       if (user && !user.expired) {
         this._user = user;
+        this.loadSecurityContext();
       }
+    });
+    this._userManager.events.addUserLoaded(() => {
+      this._userManager.getUser().then(user => {
+        this._user = user;
+        this.loadSecurityContext();
+      });
     });
   }
 
@@ -51,5 +64,12 @@ export class AuthService {
 
   signoutRedirectCallback(): Promise<any> {
     return this._userManager.signoutRedirectCallback();
+  }
+
+  loadSecurityContext() {
+    this.httpClient.get<AuthContext>(`${Constants.apiRoot}Account/AuthContext`)
+      .subscribe(context => {
+        this.authContext = context;
+      }, error => console.error(Utils.formatError(error)));
   }
 }
